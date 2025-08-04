@@ -61,6 +61,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", help="path to yolo model")
     parser.add_argument("--cam", help="camera index", type=int)
+    parser.add_argument("--engine", help="yolo engine")
     args = parser.parse_args()
 
     # create YOLO model and export engine
@@ -69,7 +70,7 @@ def main():
     # export inference engine
     model.export(format="engine")
 
-    trt_model = YOLO("yolo11n.engine")
+    trt_model = YOLO(args.engine)
 
     # init cam object
     cap = cv2.VideoCapture(args.cam)
